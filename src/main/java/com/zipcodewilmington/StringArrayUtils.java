@@ -88,27 +88,22 @@ public class StringArrayUtils {
      * @return true if each letter in the alphabet has been used in the array
      */ // TODO
     public static boolean isPangramic(String[] array) {
-//      char[] alphabet = new char[]{'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
-//      int alphabetCounter = 0;
-//      int tempIndexDecrementer = 0;
-//
-//
-//      //as alphabet[i], look through array[i]; add to counter when is equal;
-//        //temp string of index i of array
-//        //search through string for char matching alphabet
-//      for (int i = 0; i < array.length; i++){
-//          for (int j = 0; j < alphabet.length; j++){
-//              String temp = array[i];
-//              int tempIndex = array[i].length()-1 -tempIndexDecrementer;
-//    //          char tempChar = temp.charAt(tempIndex);
-//              if (temp.charAt(tempIndex) == alphabet[j]){
-//                  tempIndexDecrementer++;
-//                  alphabetCounter++;
-//              }
-//              tempIndexDecrementer++;
-//          }
-//      } tempIndexDecrementer = 0;
-        return false;
+      String[] alphabet3 = new String[]{"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
+
+//        {"The quick brown", "Fox jumps over", "The lazy dog"}
+        for (int i = 0; i < alphabet3.length; i++){
+            for (int j = 0; j < array.length; j++){
+                array[j] = array[j].toLowerCase();
+
+                if (array[j].contains(alphabet3[i])){
+                    break;
+                }
+                if (j == array.length-1 && !array[j].contains(alphabet3[i])){
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     /**
@@ -163,20 +158,30 @@ public class StringArrayUtils {
      * @return array of Strings with each consecutive duplicate occurrence concatenated as a single string in an array of Strings
      */ // TODO
     public static String[] packConsecutiveDuplicates(String[] array) {
-//        ArrayList<String> arrList = new ArrayList<String>();
-//        int arrIndex = 0;
-//        for(int i = 0; i < array.length; i++){
-//            if (arrList.contains(array[i])){
-//                arrList.set(arrIndex, array[i]);
-//            }
-//            arrList.add(array[i]);
-//            arrIndex++;
-//        }
-//
-//        String[] list = new String[0];
-//        return arrList.toArray(list);
+        ArrayList<String> arrList = new ArrayList<String>();
+        int arrIndex = 0;
+        for(int i = 0; i < array.length; i++){
+            if (arrList.contains(array[i])){
+                StringBuilder stringBuilder = new StringBuilder();
+                stringBuilder.append(arrList.get(arrIndex));
+                stringBuilder.append(array[i]);
 
-    return null;
+                arrList.set(arrIndex, stringBuilder.toString());
+            }
+            else {
+                if (!(i == 0)) {
+                    //  if(!arrList.contains((array[i+1]))){
+                    arrIndex++;
+                }
+            //    }
+                arrList.add(array[i]);
+
+            }
+        }
+
+        String[] list = new String[0];
+        return arrList.toArray(list);
+
     }
 
 
